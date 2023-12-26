@@ -1,0 +1,32 @@
+---
+import Layout from "../layouts/Layout.astro"
+---
+<Layout title="Register">
+    <div class="hero min-h-screen bg-base-200">
+        <div class="hero-content flex-col lg:flex-row-reverse">
+            <div class="text-center lg:text-left">
+                <h1 class="text-5xl font-bold">Register</h1>
+                <p class="py-6">Already have a account? <a href="/signin">Sign In</a></p>
+            </div>
+            <div class="card flex-shrink-0 w-full max-w-sm shadow-2xl bg-base-100">
+                <form class="card-body" action="/api/auth/register" method="post">
+                    <div class="form-control">
+                        <label class="label" for="email">
+                            <span class="label-text">Email</span>
+                        </label>
+                        <input type="email" placeholder="email" name="email" id="email" class="input input-bordered" required />
+                    </div>
+                    <div class="form-control">
+                        <label class="label" for="password">
+                            <span class="label-text">Password</span>
+                        </label>
+                        <input type="password" placeholder="password" name="password" id="password" class="input input-bordered" required />
+                    </div>
+                    <div class="form-control mt-6">
+                        <button class="btn btn-primary" type="submit">Register</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</Layout>
