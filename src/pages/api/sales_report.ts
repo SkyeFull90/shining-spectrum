@@ -5,7 +5,6 @@ export const GET: APIRoute = async () => {
     const { data, error } = await supabase
         .from("sales_report")
         .select("*")
-        .order("created_at", { ascending: false })
         .limit(10);
 
     if (error) {
@@ -14,5 +13,6 @@ export const GET: APIRoute = async () => {
 
     return new Response(JSON.stringify(data), {
         headers: { "content-type": "application/json" },
+        status: 200,
     });
 }
