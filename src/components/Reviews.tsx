@@ -41,11 +41,12 @@ function Reviews() {
               </form>
           </div>
 
-
           {reviews.map((review, index) => (
-              <p key={index}>{review}</p>
+              <div key={index}>
+                  <h3>{review.name}</h3>
+                  <p >{review}</p>
+              </div>
           ))}
-
       </div>
   );
 }
