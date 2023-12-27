@@ -1,6 +1,6 @@
 ---
 import Layout from "../layouts/Layout.astro";
-
+import Reviews from "../components/Reviews";
 const { email } = Astro.locals;
 ---
 <Layout title="dashboard">
@@ -13,10 +13,13 @@ const { email } = Astro.locals;
                 <form class="btn btn-primary" action="/api/auth/signout">
                     <button type="submit">Sign out</button>
                 </form>
-            </div>
+                  <div class="mt-9">
+
+                    <Reviews client:idle/>
+                   </div>
         </div>
-        <div class="mb-2">
 
         </div>
+
     </div>
 </Layout>
