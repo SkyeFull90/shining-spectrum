@@ -12,9 +12,15 @@ const Reviews: React.FC = () => {
   const [reviews, setReviews] = useState<Review[]>([]);
   const [newReview, setNewReview] = useState('');
 
-  useEffect(() => {
-    fetchReviews();
-  }, []);
+useEffect(() => {
+  (async () => {
+    try {
+      await fetchReviews();
+    } catch (error) {
+      console.error('Error fetching reviews', error);
+    }
+  })();
+}, []);
 
   const fetchReviews = async () => {
     const { data, error } = await supabase.from('reviews').select('*');
@@ -28,7 +34,11 @@ const Reviews: React.FC = () => {
     if (error) console.error('Error submitting new review', error);
     else {
       setNewReview('');
-      fetchReviews();
+      try {
+        await fetchReviews();
+      } catch (error) {
+        console.error('Error fetching reviews', error);
+      }
     }
   };
 
