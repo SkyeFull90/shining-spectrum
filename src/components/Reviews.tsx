@@ -33,10 +33,14 @@ function Reviews() {
   return (
       <div>
           <h1>Reviews</h1>
-          <form onSubmit={handleSubmit}>
-              <input type="text" value={newReview} onChange={handleInputChange}/>
-              <button type="submit">Post review</button>
-          </form>
+          <div>
+              <h2>Leave a Review</h2>
+              <form onSubmit={handleSubmit}>
+                  <input type="text" value={newReview} onChange={handleInputChange}/>
+                  <button type="submit">Post review</button>
+              </form>
+          </div>
+
 
           {reviews.map((review, index) => (
               <p key={index}>{review}</p>
