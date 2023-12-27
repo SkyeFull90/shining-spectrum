@@ -12,11 +12,11 @@ function Reviews() {
       .catch(error => console.error('Error fetching reviews:', error));
   }, []);
 
-  const handleInputChange = (event) => {
+  const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setNewReview(event.target.value);
   };
 
-  const handleSubmit = (event) => {
+  const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
 
     // Post new review to the API
@@ -28,7 +28,7 @@ function Reviews() {
         setNewReview('');
       })
       .catch(error => console.error('Error posting review:', error));
-  };
+  }; 
 
   return (
     <div>
