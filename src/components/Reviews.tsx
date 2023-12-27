@@ -1,58 +1,47 @@
-import React, { useState, useEffect } from 'react';
-import { supabase } from '../lib/supabase';
+import React, { useEffect, useState } from 'react';
+import axios from 'axios';
 
-interface Review {
-  id: number;
-  name: string;
-  review: string;
-}
-
-const Reviews: React.FC = () => {
-  const [reviews, setReviews] = useState<Review[]>([]);
+function Reviews() {
+  const [reviews, setReviews] = useState([]);
   const [newReview, setNewReview] = useState('');
 
   useEffect(() => {
-    fetchReviews();
+    // Fetch reviews from the API when the component mounts
+    axios.get('/api/reviews')
+      .then(response => setReviews(response.data))
+      .catch(error => console.error('Error fetching reviews:', error));
   }, []);
 
-  const fetchReviews = async () => {
-    const { data, error } = await supabase.from('reviews').select('*');
-    if (error) console.error('Error fetching reviews', error);
-    else setReviews(data || []);
+  const handleInputChange = (event) => {
+    setNewReview(event.target.value);
   };
 
-  const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
-    const { error } = await supabase.from('reviews').insert([{ review: newReview }]);
-    if (error) console.error('Error submitting new review', error);
-    else {
-      setNewReview('');
-      fetchReviews();
-    }
+  const handleSubmit = (event) => {
+    event.preventDefault();
+
+    // Post new review to the API
+    axios.post('/api/reviews', { review: newReview })
+      .then(response => {
+        // Add the new review to the state
+        setReviews(prevReviews => [...prevReviews, response.data]);
+        // Clear the input field
+        setNewReview('');
+      })
+      .catch(error => console.error('Error posting review:', error));
   };
 
   return (
     <div>
-      <h2>Reviews</h2>
+      <h1>Reviews</h1>
+      {reviews.map((review, index) => (
+        <p key={index}>{review}</p>
+      ))}
       <form onSubmit={handleSubmit}>
-        <input
-          type="text"
-          value={newReview}
-          onChange={(e) => setNewReview(e.target.value)}
-          required
-        />
-        <button type="submit">Submit Review</button>
+        <input type="text" value={newReview} onChange={handleInputChange} />
+        <button type="submit">Post review</button>
       </form>
-      <ul>
-        {reviews.map((review) => (
-          <li key={review.id}>
-            <p>{review.name}</p>
-            <p>{review.review}</p>
-          </li>
-        ))}
-      </ul>
     </div>
   );
-};
+}
 
 export default Reviews;
