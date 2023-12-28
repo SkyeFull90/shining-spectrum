@@ -1,6 +1,5 @@
 ---
 import Layout from "../layouts/Layout.astro";
-import Review from "../components/Review";
 const { email } = Astro.locals as { email: string };
 
 ---
@@ -14,9 +13,7 @@ const { email } = Astro.locals as { email: string };
                 <form class="btn btn-primary" action="/api/auth/signout">
                     <button type="submit">Sign out</button>
                 </form>
-                <div class="grid grid-cols-1 gap-4 mt-5">
-                    <Review />
-                </div>
+               
             </div>
         </div>
     </div>
