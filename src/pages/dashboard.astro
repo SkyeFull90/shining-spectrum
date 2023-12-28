@@ -1,7 +1,7 @@
 ---
 import Layout from "../layouts/Layout.astro";
-import Reviews from "../components/Reviews";
-const { email } = Astro.locals;
+const { email } = Astro.locals as { email: string };
+
 ---
 <Layout title="dashboard">
     <div class="hero min-h-screen" style="background-image: url(https://daisyui.com/images/stock/photo-1507358522600-9f71e620c44e.jpg);">
@@ -13,13 +13,8 @@ const { email } = Astro.locals;
                 <form class="btn btn-primary" action="/api/auth/signout">
                     <button type="submit">Sign out</button>
                 </form>
-                  <div class="mt-9">
-
-                    <Reviews client:idle/>
-                   </div>
+                          
+            </div>
         </div>
-
-        </div>
-
     </div>
 </Layout>
