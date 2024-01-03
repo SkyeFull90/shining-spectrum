@@ -1,8 +1,11 @@
 ---
 import Layout from "../layouts/Layout.astro";
-
+import {supabase} from "../lib/supabase"
 const { email } = Astro.locals as { email: string };
-
+const {data, error} = await supabase
+    .from ("")
+    .select("*")
+    .order("");
 ---
 <Layout title="dashboard">
     <header>
@@ -19,5 +22,7 @@ const { email } = Astro.locals as { email: string };
             </div>
         </div>
     </header>
-    
+    <main>
+        
+    </main>
 </Layout>
