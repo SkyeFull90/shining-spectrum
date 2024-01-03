@@ -4,8 +4,8 @@ import {supabase} from "../lib/supabase"
 const { email } = Astro.locals as { email: string };
 const {data, error} = await supabase
     .from ("")
-    .select("*")
-    .order("");
+    .select("name, message")
+    .order("created_at");
 ---
 <Layout title="dashboard">
     <header>
