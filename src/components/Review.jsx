@@ -34,7 +34,7 @@ export default function Reviews({ reviews }) {
     };
 
     return (
-        <div className="max-w-3xl w-full">
+        <div className="max-w-3xl w-full m-5">
             <ErrorBoundary fallback={<div>Something went wrong</div>}>
             <form
           onSubmit={onSubmitHandler}
