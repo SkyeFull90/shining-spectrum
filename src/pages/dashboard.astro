@@ -1,9 +1,10 @@
 ---
 import Layout from "../layouts/Layout.astro";
+import Review from "../components/Review.jsx";
 import {supabase} from "../lib/supabase"
 const { email } = Astro.locals as { email: string };
 const {data, error} = await supabase
-    .from ("")
+    .from ("guestbook_entries")
     .select("name, message")
     .order("created_at");
 ---
@@ -23,6 +24,7 @@ const {data, error} = await supabase
         </div>
     </header>
     <main>
-        <p class="m-6 text-center">Hello World</p>
+     <!-- <p class="m-6 text-center">Hello World</p> --> 
+     <Review reviews={data} client:idle/>
     </main>
 </Layout>
