@@ -9,21 +9,17 @@ const {data, error} = await supabase
     .order("created_at");
 ---
 <Layout title="dashboard">
-    <header>
-        <div class="hero min-h-screen" style="background-image: url(https://daisyui.com/images/stock/photo-1507358522600-9f71e620c44e.jpg);">
+    <div class="hero min-h-screen" style="background-image: url(https://daisyui.com/images/stock/photo-1507358522600-9f71e620c44e.jpg);">
         <div class="hero-overlay bg-opacity-60"></div>
         <div class="hero-content text-center text-neutral-content">
-            <div class="max-w-md">
+            <div class="max-w-screen-xl">
                 <h1 class="mb-5 text-5xl font-bold">Welcome {email}</h1>
                 <p class="mb-5">We are happy to see you here</p>
                 <form class="btn btn-primary" action="/api/auth/signout">
                     <button type="submit">Sign out</button>
                 </form>
+                <Review reviews={data} client:idle/>
             </div>
             </div>
         </div>
-    </header>
-    <main>
-     <Review reviews={data} client:idle/>
-    </main>
 </Layout>
